@@ -1,5 +1,5 @@
 typedef struct SlidingWindowNode {
-	SlidingWindowNode * next;
+	struct SlidingWindowNode * next;
 	int value;
 } SlidingWindowNode;
 

@@ -5,6 +5,6 @@ sfc_module = Extension('validator', sources = ['validator.c'])
 setup(
     name='validator',
     version='1.0',
-    description='Package to validate a given function',
+    description='Package to validate a given array',
     ext_modules=[sfc_module]
 )
