@@ -40,7 +40,6 @@ int _verify (int *list_repr, int chain_length, int N, int R) {
 			ptrs[0]++;
 		};
 	}
-	free(list_repr);
 	free(ptrs);
 	// calculate the payoffs
 	int *max_payoffs = malloc(chain_length * sizeof(int));

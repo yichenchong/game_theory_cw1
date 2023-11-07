@@ -2,28 +2,20 @@
 #include <stdlib.h>
 #include "validator_backend.h"
 
-extern PyObject *verify(PyObject *self, PyObject *args) {
-	PyObject *list_repr_obj;
-	int N, R;
+extern int verify(int* list_repr, int N, int R) {
+	printf("0\n");
 
 	// let's copy the list_repr so we don't have to deal with reference counting
-	if (!PyArg_ParseTuple(args, "OII", &list_repr_obj, &N, &R)) return NULL;
-	if (sizeof(PyList_Size(list_repr_obj)) != R) return NULL;
+	printf("0.5\n");
 	int chain_length = 0;
-	Py_INCREF(list_repr_obj);
-	int *list_repr = malloc(R * sizeof(int));
-	for (int i = 0; i < R; i++) {
-		int item = PyLong_AsLong(PyList_GetItem(list_repr_obj, i));
-		if (item) chain_length++;
-		list_repr[i] = item;
-	}
-	Py_DECREF(list_repr_obj);
-	if (chain_length == 0) {
-		free(list_repr);
-		return NULL;
-	}
-	for (int i = 0; i < R; i++) printf("%d", list_repr[i]); // TODO: remove
-
-	return PyBool_FromLong(_verify(list_repr, chain_length, N, R));
+	printf("1\n");
+	for (int i = 0; i < R; i++) if (list_repr[i]) chain_length++;
+	printf("2\n");
+	if (chain_length == 0) return -1;
+	// printf("3\n");
+	for (int i = 0; i < R; i++) printf("%d ", list_repr[i]); // TODO: remove
+	printf("\n");
+	int result = _verify(list_repr, chain_length, N, R);
+	return result;
 }
 
