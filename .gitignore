@@ -1,8 +1,8 @@
-.idea
-.venv
-.vs
-.vscode
-c-make-build-debug/**
-c-make-build-release/**
+.idea/**
+.venv/**
+.vs/**
+.vscode/
+c-make-build-debug/
+c-make-build-release/
 **.o
 **.so
