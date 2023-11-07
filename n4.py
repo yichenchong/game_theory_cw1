@@ -1,4 +1,5 @@
 from z3 import *
+import pathlib
 
 
 s = Solver()
@@ -16,15 +17,24 @@ def main():
     s.add(d - c < 2)
     s.add(c - b < 6)
 
-    print_all_solutions(dv)
+    map_solutions(dv)
 
 
-def print_all_solutions(dv: list):
+def map_solutions(dv: list, f: Function = print):
     solver = s.__deepcopy__()
     while solver.check() == sat:
-        print([solver.model()[i] for i in dv])
+        f([solver.model()[i] for i in dv])
         solver.add(Or(*[i != solver.model()[i] for i in dv]))
 
+def verify(solution: list):
+    R = 10
+    N = 4
+    libname = pathlib.Path().absolute() / "validator/validator.so"
+    c_lib = ctypes.CDLL(libname)
+    arr_type = ctypes.c_int * R
+    c_lib.verify_list_repr.argtypes = [arr_type, ctypes.c_int, ctypes.c_int]
+    if c_lib.verify_list_repr(arr_type(*solution), N, R):
+        print(solution)
 
 if __name__ == "__main__":
     main()

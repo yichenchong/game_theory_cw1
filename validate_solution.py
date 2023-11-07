@@ -71,7 +71,7 @@ def max_payout(diff_list: np.array, weight_list: np.array) -> float:
 
 
 if __name__ == "__main__":
-    data = choice_list_to_list_repr([3, 4, 8, 8])
+    data = choice_list_to_list_repr([2, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     print(data)
     start_time = timeit.default_timer()
     cc = construct_chains(data)

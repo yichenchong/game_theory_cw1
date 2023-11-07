@@ -6,7 +6,7 @@ typedef struct SlidingWindowNode {
 	int value;
 } SlidingWindowNode;
 
-SlidingWindow *createSlidingWindow(int * values, int length) {
+SlidingWindow *createSlidingWindow(const int * values, int length) {
 	SlidingWindow * newSlidingWindow = calloc(1, sizeof(SlidingWindow));
     newSlidingWindow->length = length;
 	if (length == 0) return newSlidingWindow;
@@ -34,12 +34,12 @@ SlidingWindow *createSlidingWindow(int * values, int length) {
 }
 
 void freeSlidingWindow(SlidingWindow *d) {
-    SlidingWindowNode *ptr = d->head;
-    SlidingWindowNode *nextPtr = ptr->next;
-    while (ptr) {
-        free(ptr);
-        ptr = nextPtr;
-        if (ptr->next) nextPtr = ptr->next;
+    SlidingWindowNode *prevPtr = d->head;
+    SlidingWindowNode *nextPtr = prevPtr->next;
+    while (nextPtr) {
+        free(prevPtr);
+        prevPtr = nextPtr;
+        nextPtr = nextPtr->next;
     }
     free(d);
 }
@@ -59,7 +59,7 @@ int sliding_window_append(SlidingWindow *d, int newValue) {
     return oldValue;
 }
 
-SummedWindow *createSummedWindow(int * values, int length) {
+SummedWindow *createSummedWindow(const int * values, int length) {
     SlidingWindow *window = createSlidingWindow(values, length);
     SlidingWindowNode *ptr = window->head;
     int sum = 0;
@@ -78,7 +78,7 @@ void freeSummedWindow(SummedWindow *window) {
     free(window);
 }
 
-int summedWindowAppend(SummedWindow *window, int newValue) {
+int summed_window_append(SummedWindow *window, int newValue) {
     int popped = sliding_window_append(window->window, newValue);
     window->sum += newValue - popped;
     return window->sum;
