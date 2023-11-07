@@ -1,3 +1,5 @@
+#include "window.h"
+
 typedef struct SlidingWindowNode {
 	struct SlidingWindowNode * next;
 	int value;
