@@ -11,7 +11,7 @@ extern PyObject *verify(PyObject *self, PyObject *args) {
 	if (sizeof(PyList_Size(list_repr_obj)) != R) return NULL;
 	int chain_length = 0;
 	Py_INCREF(list_repr_obj);
-	int *list_repr = malloc(R);
+	int *list_repr = malloc(R * sizeof(int));
 	for (int i = 0; i < R; i++) {
 		int item = PyLong_AsLong(PyList_GetItem(list_repr_obj, i));
 		if (item) chain_length++;

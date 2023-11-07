@@ -1,5 +1,6 @@
 from invoke import task, Context, run
 import sys
+import os
 
 
 on_win = sys.platform.startswith("win")
@@ -22,7 +23,7 @@ def build(c, path=None):
             c.run(path)
     else:
         print("Building C Library")
-        cmd = "gcc -c -fpic validator/**.c"
-        run(cmd)
-        run("gcc -shared -o validator/validator.so validator/validator.o")
+        run("cd validator && gcc -g -c **.c")
+        run("cd validator/window && gcc -g -c **.c")
+        run("gcc -shared -o validator/validator.so validator/**.o validator/window/**.o")
         print("* Complete")
