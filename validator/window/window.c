@@ -55,8 +55,8 @@ int sliding_window_append(SlidingWindow *d, int newValue) {
 
     SlidingWindowNode * newNode = calloc(1, sizeof(SlidingWindowNode));
     newNode->value = newValue;
-    d->tail->next = newValue;
-    d->tail = newValue;
+    d->tail->next = newNode;
+    d->tail = newNode;
     int oldValue = d->head->value;
     d->head = d->head->next;
     return oldValue;
@@ -82,7 +82,7 @@ SummedWindow *createSummedWindow(int * values, int length) {
 }
 
 void freeSummedWindow(SummedWindow *window) {
-    freeSlidingWindow(window);
+    freeSlidingWindow(window->window);
     free(window);
 }
 

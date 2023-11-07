@@ -32,7 +32,7 @@ static PyObject *verify(PyObject *self, PyObject *args) {
 	Py_INCREF(list_repr_obj);
 	int *list_repr = malloc(R);
 	for (int i = 0; i < R; i++) {
-		int item = PyLong_AsLong(PyList_GetItem(list_repr, i));
+		int item = PyLong_AsLong(PyList_GetItem(list_repr_obj, i));
 		if (item) chain_length++;
 		list_repr[i] = item;
 	}
@@ -41,7 +41,7 @@ static PyObject *verify(PyObject *self, PyObject *args) {
 		free(list_repr);
 		return NULL;
 	}
-	for (int i = 0; i < R; i++) printf(list_repr[i]); // TODO: remove
+	for (int i = 0; i < R; i++) printf("%d", list_repr[i]); // TODO: remove
 
 	// convert to chain representation
 	IntPair *main_chain = malloc(chain_length * sizeof(int));
