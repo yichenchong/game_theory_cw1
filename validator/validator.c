@@ -88,10 +88,10 @@ static int verify(const IntPair *chain_repr, int chain_length, int R) {
       minCurrentPayout < maxMutatedPayout
       || (chain_repr[0].n2 == 1 &&
           (chain_repr[1].n1 - chain_repr[0].n1 != 1
-          || (float) (last == 1) * nodeMutatedPayouts[1] + currentPayouts[0] / (float) (chain_repr[1].n2 + 1) > currentPayouts[0]))
+          || nodeMutatedPayouts[1] + currentPayouts[0] / (float) (chain_repr[1].n2 + 1) > currentPayouts[0]))
       || (chain_repr[last].n2 == 1 &&
           (chain_repr[last].n1 - chain_repr[last - 1].n1 != 1
-           || (float) (last == 1) * nodeMutatedPayouts[last - 1] + currentPayouts[last] / (float) (chain_repr[last].n2 + 1) > currentPayouts[last]))
+           || nodeMutatedPayouts[last - 1] + currentPayouts[last] / (float) (chain_repr[last].n2 + 1) > currentPayouts[last]))
   ) {
     free(nodeMutatedPayouts);
     free(currentPayouts);
