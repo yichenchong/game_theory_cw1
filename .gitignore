@@ -2,3 +2,5 @@
 .venv
 .vs
 .vscode
+**.o
+**.so

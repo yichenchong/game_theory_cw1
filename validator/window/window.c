@@ -1,15 +1,10 @@
 #include "window.h"
+#include <stdlib.h>
 
 typedef struct SlidingWindowNode {
 	struct SlidingWindowNode * next;
 	int value;
 } SlidingWindowNode;
-
-typedef struct SlidingWindow {
-	SlidingWindowNode * head;
-	SlidingWindowNode * tail;
-    int length;
-} SlidingWindow;
 
 SlidingWindow *createSlidingWindow(int * values, int length) {
 	SlidingWindow * newSlidingWindow = calloc(1, sizeof(SlidingWindow));
@@ -63,11 +58,6 @@ int sliding_window_append(SlidingWindow *d, int newValue) {
     d->head = d->head->next;
     return oldValue;
 }
-
-typedef struct SummedWindow {
-    SlidingWindow *window;
-    int sum;
-} SummedWindow;
 
 SummedWindow *createSummedWindow(int * values, int length) {
     SlidingWindow *window = createSlidingWindow(values, length);

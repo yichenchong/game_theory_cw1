@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "validator_backend.h"
 
-static PyObject *verify(PyObject *self, PyObject *args) {
+extern PyObject *verify(PyObject *self, PyObject *args) {
 	PyObject *list_repr_obj;
 	int N, R;
 
