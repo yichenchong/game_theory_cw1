@@ -2,6 +2,11 @@ from typing import List, Tuple
 import numpy as np
 import timeit
 
+r = 4
+
+# a python naive implementation of the verification algorithm
+# used in quickly checking my work (very verbose and quite slow)
+
 
 def choice_list_to_list_repr(choice_list: List[int]) -> np.array:
     list_repr = np.zeros(10, dtype=int)
@@ -52,7 +57,7 @@ def chain_to_diff_list(chain: List[Tuple[int, int]]) -> Tuple[np.array, np.array
         weight_list.append(chain[i][0])
         weight_list.append(1)
 
-    window_sum = slide_window(2 * (11 - chain[-1][1]) - 1, window_sum)
+    window_sum = slide_window(2 * (r + 1 - chain[-1][1]) - 1, window_sum)
     slide_window(-1, window_sum)
     return np.array(diff_list), np.array(weight_list)
 
@@ -71,7 +76,8 @@ def max_payout(diff_list: np.array, weight_list: np.array) -> float:
 
 
 if __name__ == "__main__":
-    data = choice_list_to_list_repr([2, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    # data = choice_list_to_list_repr([2, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    data = [0, 2, 1, 0]
     print(data)
     start_time = timeit.default_timer()
     cc = construct_chains(data)

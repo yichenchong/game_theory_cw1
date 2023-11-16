@@ -6,9 +6,9 @@
 #include <time.h>
 
 int main() {
-    int N = 10;
-    int R = 10;
-    int input[10] = {2, 2, 3,4, 5, 6, 7, 8, 9, 10};
+    int N = 3;
+    int R = 4;
+    int input[5] = {2, 2, 3};
 
     clock_t start;
     clock_t end;
