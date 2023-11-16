@@ -1,3 +1,8 @@
+"""
+Invoke file to build the validator project
+Does not work yet on Windows
+"""
+
 from invoke import task, Context, run
 import sys
 import os

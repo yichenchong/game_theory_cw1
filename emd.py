@@ -61,28 +61,33 @@ def list_repr_to_arr_repr(r, list_repr: list) -> np.array:
 
 def all_e():
     e = []
-    for r in range(3, 10):
+    for r in range(3, 13):
         e_row = []
-        for n in range(3, r):
+        for n in range(2, r):
+            print(r, n)
             data = []
-            with open(f'data/r10equilibria/{n}.csv', newline='') as csvfile:
+            with open(f'data/r{r}equilibria/{n}.csv', newline='') as csvfile:
                 spamreader = csv.reader(csvfile, delimiter=',')
                 for row in spamreader:
                     data.append(list_repr_to_arr_repr(r, [int(i) for i in row]))
             e_row.append(average_dist(data))
         e.append(e_row)
-    with open('data/emd/e.csv', 'w', newline='') as csvfile:
+    with open('data/emd/e.csv', 'w') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',')
-        for row in data:
+        for row in e:
             spamwriter.writerow(row)
 
 
 def all_d():
     d = []
-    for r in range(3, 10):
-        d_row = [average_normalised_emd(9, 10, 10000, generator=np.random.default_rng(i)) for i in range(100)]
-
+    for r in range(3, 13):
+        print(r)
+        d_row = [average_normalised_emd(n, r, 10000, generator=np.random.default_rng(n)) for n in range(2, r)]
         d.append(d_row)
+    with open('data/emd/d.csv', 'w') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter=',')
+        for row in d:
+            spamwriter.writerow(row)
 
 
 if __name__ == "__main__":
