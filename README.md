@@ -11,6 +11,7 @@ The Election Game is a discrete variation on the classic Hotelling-Downs Model, 
 ### Directories
 - `data` - The data generated in the coursework
 - `validator` - C binding containing efficient validation algorithm
+- `report` - finalised report, including context and derivations of algorithms
 ### Code Files
 - `validate_solution.py`: A Python implementation of the naive algorithm, designed to be verbose, to examine individual scenarios and determine why or why not it is an equilibrium
 - `tasks.py`: An `invoke` compiler for the `validator` library
